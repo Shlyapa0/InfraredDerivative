@@ -1,0 +1,6 @@
+function bulk_IR_der(frameNumbers)
+scale = 6/182.18;
+for i = frameNumbers
+    IR_der_v2("FileName", 'Cap1.ptw', 'FilePath', 'C:\Users\User\Downloads','FrameIndex', i, 'Scale', scale)
+end
+end
