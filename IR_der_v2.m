@@ -1,7 +1,7 @@
 function Txy_mean = IR_der_v2(options)
     arguments
         options.Scale (1,1) double = 12.3/392; % cm/pix
-        options.FrameIndex (1,1) int64 = 1;
+        options.FrameIndex (:,1) int64 = int64([]);
         options.FileName (1,1) string = "";
         options.FilePath (1,1) string = "";
     end
@@ -126,47 +126,45 @@ for ind = 1 : Nf
     Txy = sqrt(Tx.^2 + Ty.^2);
     Txy_mean = sum(sum(Txy))/((Nx-1)*(Ny-1))
     
-    hf1 = figure;
-    axes;
-    x = (1:Nx)*scale;
-    line('XData',x,'YData',T0(round(Ny/2),:),'Color','k','LineStyle','none','Marker','o')
-    line('XData',x,'YData',T(round(Ny/2),:),'Color','r')
-
-    return
+%     hf1 = figure;
+%     axes;
+%     x = (1:Nx)*scale;
+%     line('XData',x,'YData',T0(round(Ny/2),:),'Color','k','LineStyle','none','Marker','o')
+%     line('XData',x,'YData',T(round(Ny/2),:),'Color','r')
     
-    hf = figure('Colormap',jet(256));
-    ha = axes('Box','on','Layer','top','TickDir','out','DataAspectRatio',[1,1,1],...
-        'XLim',[0.5,Nx-0.5]*scale,'YLim',[0.5,Ny-0.5]*scale);
-    him = image('XData',[1,Nx]*scale,'YData',[Ny,1]*scale,'CDataMapping','scaled');
-    hcol = findobj(colorbar,'Type','axes');
-    xlabel('\itx\rm, cm')
-    ylabel('\ity\rm, cm')
-    
-    set(him,'CData',T)
-    figure(hf)
-    set(hcol,'TickDir','out')
-    print(hf,sprintf('%sT',fp1),'-dpng','-r150')
-    
-    set(ha, 'XLim',[0.5,Nx-1.5]*scale,'YLim',[0.5,Ny-1.5]*scale)
-    set(him,'XData',[1,Nx-1]*scale,'YData',[Ny-1,1]*scale)
-    
-    set(him,'CData',Tx)
-    figure(hf)
-    set(hcol,'TickDir','out')
-    print(hf,sprintf('%sTx',fp1),'-dpng','-r150')
-    
-    set(him,'CData',Ty)
-    figure(hf)
-    set(hcol,'TickDir','out')
-    print(hf,sprintf('%sTy',fp1),'-dpng','-r150')
-    
-    set(him,'CData',Txy)
-    figure(hf)
-    set(hcol,'TickDir','out')
-    print(hf,sprintf('%sTxy',fp1),'-dpng','-r150')
+%     hf = figure('Colormap',jet(256));
+%     ha = axes('Box','on','Layer','top','TickDir','out','DataAspectRatio',[1,1,1],...
+%         'XLim',[0.5,Nx-0.5]*scale,'YLim',[0.5,Ny-0.5]*scale);
+%     him = image('XData',[1,Nx]*scale,'YData',[Ny,1]*scale,'CDataMapping','scaled');
+%     hcol = findobj(colorbar,'Type','axes');
+%     xlabel('\itx\rm, cm')
+%     ylabel('\ity\rm, cm')
+%     
+%     set(him,'CData',T)
+%     figure(hf)
+%     set(hcol,'TickDir','out')
+%     print(hf,sprintf('%sT',fp1),'-dpng','-r150')
+%     
+%     set(ha, 'XLim',[0.5,Nx-1.5]*scale,'YLim',[0.5,Ny-1.5]*scale)
+%     set(him,'XData',[1,Nx-1]*scale,'YData',[Ny-1,1]*scale)
+%     
+%     set(him,'CData',Tx)
+%     figure(hf)
+%     set(hcol,'TickDir','out')
+%     print(hf,sprintf('%sTx',fp1),'-dpng','-r150')
+%     
+%     set(him,'CData',Ty)
+%     figure(hf)
+%     set(hcol,'TickDir','out')
+%     print(hf,sprintf('%sTy',fp1),'-dpng','-r150')
+%     
+%     set(him,'CData',Txy)
+%     figure(hf)
+%     set(hcol,'TickDir','out')
+%     print(hf,sprintf('%sTxy',fp1),'-dpng','-r150')
 end
 
-delete([hf1,hf])
+% delete([hf1,hf])
 close_im();
 
 
